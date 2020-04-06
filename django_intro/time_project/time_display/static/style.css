@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#wrapper{
+    margin: 2% 2% 2% 2%;
+    width: 80%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+h3{
+    text-decoration: underline;
+}
+
+h2{
+    border-style: solid;
+    border-width: thick;
+    border-color: blue;
+    margin-top: 5%;
+    padding: 2%;
+}
