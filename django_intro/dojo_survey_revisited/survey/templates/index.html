@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta lang="en-US">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <script src="{% static 'javascript.js' %}" async defer></script>
+    </head>
+    <body>
+        <div id=wrapper>
+            <h3>Order a Pizza:</h3>
+            <form action="/process_form" method="post">
+                {% csrf_token %}
+                <p>Name: <input name="one" type="text"></p>
+                <p>
+                    <input type="radio" id="small" name="two" value="small">
+                    <label for="small">Small</label><br>
+                    <input type="radio" id="medium" name="two" value="medium">
+                    <label for="medium">Medium</label><br>
+                    <input type="radio" id="large" name="two" value="large">
+                    <label for="large">Large</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="top1" name="three" value="Pepperoni">
+                    <label for="vehicle1"> Pepperoni</label><br>
+                    <input type="checkbox" id="top2" name="four" value="Sausage">
+                    <label for="vehicle2"> Sausage</label><br>
+                    <input type="checkbox" id="top3" name="five" value="Onions">
+                    <label for="vehicle3"> Onions</label>
+                </p>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>
