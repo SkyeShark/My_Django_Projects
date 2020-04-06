@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Random Word</title>
+        <meta name="description" content="Random Word.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <h1>Random Word Generator (Attempt #{{attempt_num}}):</h1>
+        <p>{{random_word}}</p>
+        <form action="/generate" method="post">{% csrf_token %}<button type="submit">Generate</button></form>
+        <form action="/" method="post">{% csrf_token %}<button type="submit">Reset</button></form>
+    </body>
+</html>
