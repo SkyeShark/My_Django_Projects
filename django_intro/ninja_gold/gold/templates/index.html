@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta lang="en-US">
+        <title>Ninja Gold</title>
+        <meta name="description" content="Gold for ninjas">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+  <body>
+    <p>Your Gold: {{gold_amount}} </p>
+    <h3>Farm</h3>
+    <p>(Earns 10-20 golds)</p>
+    <form action="/process_money" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="farm" value="farm">
+        <input type="submit" value="Find Gold!">
+    </form>
+    <h3>Cave</h3>
+    <p>(Earns 5-10 golds)</p>
+    <form action="/process_money" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="cave" value="cave">
+        <input type="submit" value="Find Gold!">
+    </form>
+    <h3>House</h3>
+    <p>(Earns 2-5 golds)</p>
+    <form action="/process_money" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="house" value="house">
+        <input type="submit" value="Find Gold!">
+    </form>
+    <h3>Casino</h3>
+    <p>(Earns/Takes 0-50 golds)</p>
+    <form action="/process_money" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="casino" value="casino">
+        <input type="submit" value="Find Gold!">
+    </form>
+    <h2>Activities: </h2>
+    <p>{{activity_log}}</p>
+    <form action="/" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Reset Game">
+    </form>
+  </body>
+</html>
