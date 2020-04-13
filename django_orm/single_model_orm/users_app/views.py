@@ -1,0 +1,3 @@
+from django.shortcuts import render, HttpResponse
+def index(request):
+    return HttpResponse("THIS IS AN APPPPPPPPPPPAPPPAPSPAPSASPAPSPDAPSDPPWOP21RKO2R12LRL12;R,L,32L.QE,QW./,W/,AWLFKAKF;LSF,EO3K2TJ93POKGTOWKF;EKFSGM")

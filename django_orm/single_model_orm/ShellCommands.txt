@@ -1,0 +1,63 @@
+(djangoPy3Env) C:\Users\sdn52\Desktop\Coding_Dojo_Stuff\Python\python_stack\django\django_orm\single_model_orm>python manage.py makemigrations
+Migrations for 'users_app':
+  users_app\migrations\0001_initial.py
+    - Create model User
+
+(djangoPy3Env) C:\Users\sdn52\Desktop\Coding_Dojo_Stuff\Python\python_stack\django\django_orm\single_model_orm>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions, users_app
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying sessions.0001_initial... OK
+  Applying users_app.0001_initial... OK
+
+(djangoPy3Env) C:\Users\sdn52\Desktop\Coding_Dojo_Stuff\Python\python_stack\django\django_orm\single_model_orm>
+
+
+(djangoPy3Env) C:\Users\sdn52\Desktop\Coding_Dojo_Stuff\Python\python_stack\django\django_orm\single_model_orm>python manage.py shell
+Python 3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 23:03:10) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from users_app.models import *
+>>> User.objects.create(first_name="Business",last_name="Doggo",email_address="woof@bark.ruff",age=7)
+<User: User object (1)>
+>>> User.onjects.create(first_name="Science",last_name="Catto",email_address="meow@purr.mew",age=10)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'User' has no attribute 'onjects'
+>>> User.objects.create(first_name="Science",last_name="Catto",email_address="meow@purr.mew",age=10)
+<User: User object (2)>
+>>> User.objects.create(first_name="Stonk",last_name="Fisho",email_address="blub@gurgle.water",age=3)
+<User: User object (3)>
+>>> User.objects.all().values()
+<QuerySet [{'id': 1, 'first_name': 'Business', 'last_name': 'Doggo', 'email_address': 'woof@bark.ruff', 'age': 7, 'created_at': datetime.datetime(2020, 4, 13, 0, 48, 6, 953326, tzinfo=<UTC>), 'updated_at': datetime.datetime(2020, 4, 13, 0, 48, 6, 953326, tzinfo=<UTC>)}, {'id': 2, 'first_name': 'Science', 'last_name': 'Catto', 'email_address': 'meow@purr.mew', 'age': 10, 'created_at': datetime.datetime(2020, 4, 13, 0, 48, 58, 669932, tzinfo=<UTC>), 'updated_at': datetime.datetime(2020, 4, 13, 0, 48, 58, 669932, tzinfo=<UTC>)}, {'id': 3, 'first_name': 'Stonk', 'last_name': 'Fisho', 'email_address': 'blub@gurgle.water', 'age': 3, 'created_at': datetime.datetime(2020, 4, 13, 0, 49, 46, 480733, tzinfo=<UTC>), 'updated_at': datetime.datetime(2020, 4, 13, 0, 49, 46, 480733, tzinfo=<UTC>)}]>
+>>> User.objects.last().__dict__
+{'_state': <django.db.models.base.ModelState object at 0x00000209B4D99DC0>, 'id': 3, 'first_name': 'Stonk', 'last_name': 'Fisho', 'email_address': 'blub@gurgle.water', 'age': 3, 'created_at': datetime.datetime(2020, 4, 13, 0, 49, 46, 480733, tzinfo=<UTC>), 'updated_at': datetime.datetime(2020, 4, 13, 0, 49, 46, 480733, tzinfo=<UTC>)}
+>>> User.objects.first().__dict__
+{'_state': <django.db.models.base.ModelState object at 0x00000209B4D99940>, 'id': 1, 'first_name': 'Business', 'last_name': 'Doggo', 'email_address': 'woof@bark.ruff', 'age': 7, 'created_at': datetime.datetime(2020, 4, 13, 0, 48, 6, 953326, tzinfo=<UTC>), 'updated_at': datetime.datetime(2020, 4, 13, 0, 48, 6, 953326, tzinfo=<UTC>)}
+>>> update = User.objects.get(id=3)
+>>> update.last_name = "Pancakes"
+>>> update.save()
+>>> delete = User.objects.get(id=2)
+>>> delete.delete()
+(1, {'users_app.User': 1})
+>>> User.objects.all().order_by("first_name").values()
+<QuerySet [{'id': 1, 'first_name': 'Business', 'last_name': 'Doggo', 'email_address': 'woof@bark.ruff', 'age': 7, 'created_at': datetime.datetime(2020, 4, 13, 0, 48, 6, 953326, tzinfo=<UTC>), 'updated_at': datetime.datetime(2020, 4, 13, 0, 48, 6, 953326, tzinfo=<UTC>)}, {'id': 3, 'first_name': 'Stonk', 'last_name': 'Pancakes', 'email_address': 'blub@gurgle.water', 'age': 3, 'created_at': datetime.datetime(2020, 4, 13, 0, 49, 46, 480733, tzinfo=<UTC>), 'updated_at': datetime.datetime(2020, 4, 13, 1, 30, 51, 391844, tzinfo=<UTC>)}]>
+>>> User.objects.all().order_by("-first_name").values()
+<QuerySet [{'id': 3, 'first_name': 'Stonk', 'last_name': 'Pancakes', 'email_address': 'blub@gurgle.water', 'age': 3, 'created_at': datetime.datetime(2020, 4, 13, 0, 49, 46, 480733, tzinfo=<UTC>), 'updated_at': datetime.datetime(2020, 4, 13, 1, 30, 51, 391844, tzinfo=<UTC>)}, {'id': 1, 'first_name': 'Business', 'last_name': 'Doggo', 'email_address': 'woof@bark.ruff', 'age': 7, 'created_at': datetime.datetime(2020, 4, 13, 0, 48, 6, 953326, tzinfo=<UTC>), 'updated_at': datetime.datetime(2020, 4, 13, 0, 48, 6, 953326, tzinfo=<UTC>)}]>
+>>>
