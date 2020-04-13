@@ -1,0 +1,56 @@
+(djangoPy3Env) C:\Users\sdn52\Desktop\Coding_Dojo_Stuff\Python\python_stack\django\django_orm\dojo_ninjas_proj>python manage.py shell
+Python 3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 23:03:10) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from dojo_ninjas_app.models import *
+>>> Dojo.objects.create(name="Coding Dojo",city="Seattle",state="WA")
+<Dojo: Dojo object (1)>
+>>> Dojo.objects.create(name="Codingasff Dojo",city="Seasfafsfttle",state="WsasffA")
+<Dojo: Dojo object (2)>
+>>> Dojo.objects.create(name="Codinga232sff Dojo",city="Seas333fafsfttle",state="Wsasf222fA")
+<Dojo: Dojo object (3)>
+>>> delee = Dojo.objects.get(id=1)
+>>> delee.delete()
+(1, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 1})
+>>> delee = Dojo.objects.get(id=2)
+>>> delee.delete()
+(1, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 1})
+>>> delee = Dojo.objects.get(id=3)
+>>> delee.delete()
+(1, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 1})
+>>> Dojo.objects.all()
+<QuerySet []>
+>>> Dojo.objects.create(name="Dojo 1",city="Seattle",state="WA")
+<Dojo: Dojo object (4)>
+>>> Dojo.objects.create(name="Dojo 2",city="San Jose",state="CA")
+<Dojo: Dojo object (5)>
+>>> Dojo.objects.create(name="Dojo 3",city="Dallas",state="TX")
+<Dojo: Dojo object (6)>
+>>> this_dojo = Dojo.objects.get(id=4)
+>>> ninja1 = Ninja.objects.create(dojo=this_dojo,first_name="Bob",last_name="Bobby")
+>>> ninja2 = Ninja.objects.create(dojo=this_dojo,first_name="Marry",last_name="Marylynn")
+>>> ninja3 = Ninja.objects.create(dojo=this_dojo,first_name="Tom",last_name="Thompson")
+>>> this_dojo = Dojo.objects.get(id=5)
+>>> ninja4 = Ninja.objects.create(dojo=this_dojo,first_name="Dooo",last_name="Doodle")
+>>> ninja5 = Ninja.objects.create(dojo=this_dojo,first_name="Ron",last_name="Ronald")
+>>> ninja6 = Ninja.objects.create(dojo=this_dojo,first_name="Ti",last_name="TELAH")
+>>> this_dojo = Dojo.objects.get(id=6)
+>>> ninja7 = Ninja.objects.create(dojo=this_dojo,first_name="Do",last_name="TELAH")
+>>> ninja8 = Ninja.objects.create(dojo=this_dojo,first_name="Haley",last_name="Bopp")
+>>> ninja9 = Ninja.objects.create(dojo=this_dojo,first_name="Nike",last_name="Decades")
+>>> first_dojo = Dojo.objects.first()
+>>> Ninja.objects.filter(dojo=first_dojo).values()
+<QuerySet [{'id': 1, 'dojo_id': 4, 'first_name': 'Bob', 'last_name': 'Bobby'}, {'id': 2, 'dojo_id': 4, 'first_name': 'Marry', 'last_name': 'Marylynn'}, {'id': 3, 'dojo_id': 4, 'first_name': 'Tom', 'last_name': 'Thompson'}]>
+>>> last_dojo = Dojo.objects.last()
+>>> Ninja.objects.filter(dojo=last_dojo).values()
+<QuerySet [{'id': 7, 'dojo_id': 6, 'first_name': 'Do', 'last_name': 'TELAH'}, {'id': 8, 'dojo_id': 6, 'first_name': 'Haley', 'last_name': 'Bopp'}, {'id': 9, 'dojo_id': 6, 'first_name': 'Nike', 'last_name': 'Decades'}]>
+>>> last_ninja = Ninja.objects.last()
+>>> print(last_ninja.dojo)
+Dojo object (6)
+>>> exit()
+
+
+>>> from dojo_ninjas_app.models import *
+>>> Dojo.objects.create(name="Dojo 4",city="SPACE",state="FL",desc="ROCKETZ!")
+<Dojo: Dojo object (7)>
+>>>
