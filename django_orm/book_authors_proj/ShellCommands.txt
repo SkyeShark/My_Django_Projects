@@ -1,0 +1,96 @@
+>>> from book_authors_app.models import *
+>>> Book.objects.create(title="C Sharp",desc="A book about programming in C#")
+<Book: Book object (1)>
+>>> Book.objects.create(title="Java",desc="A book about programming in Java")
+<Book: Book object (2)>
+>>> Book.objects.create(title="Python",desc="A book about programming in Python")
+<Book: Book object (3)>
+>>> Book.objects.create(title="PHP",desc="A book about programming in PHP")
+<Book: Book object (4)>
+>>> Book.objects.create(title="Ruby",desc="A book about programming in Ruby")
+<Book: Book object (5)>
+>>> Author.objects.create(first_name="Jane",last_name="Austen")
+<Author: Author object (1)>
+>>> Author.objects.create(first_name="Emily",last_name="Dickinson")
+<Author: Author object (2)>
+>>> Author.objects.create(first_name="Fyodor",last_name="Dostoevksy")
+<Author: Author object (3)>
+>>> Author.objects.create(first_name="William",last_name="Shakespeare")
+<Author: Author object (4)>
+>>> Author.objects.create(first_name="Lau",last_name="Tzu")
+<Author: Author object (5)>
+>>> exit()
+
+(djangoPy3Env) C:\Users\sdn52\Desktop\Coding_Dojo_Stuff\Python\python_stack\django\django_orm\book_authors_proj>python manage.py makemigrations
+You are trying to add a non-nullable field 'notes' to author without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> "this is an author"
+Migrations for 'book_authors_app':
+  book_authors_app\migrations\0002_author_notes.py
+    - Add field notes to author
+
+(djangoPy3Env) C:\Users\sdn52\Desktop\Coding_Dojo_Stuff\Python\python_stack\django\django_orm\book_authors_proj>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, book_authors_app, contenttypes, sessions
+Running migrations:
+  Applying book_authors_app.0002_author_notes... OK
+
+(djangoPy3Env) C:\Users\sdn52\Desktop\Coding_Dojo_Stuff\Python\python_stack\django\django_orm\book_authors_proj>
+(djangoPy3Env) C:\Users\sdn52\Desktop\Coding_Dojo_Stuff\Python\python_stack\django\django_orm\book_authors_proj>python manage.py shell
+Python 3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 23:03:10) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from book_authors_app.models import *
+>>> booker = Book.objects.get(id=1)
+>>> booker.title="C#"
+>>> booker.save()
+>>> auther = Author.objects.get(id=4)
+>>> auther.first_name="Bill"
+>>> auther.save()
+>>> this_book = Book.objects.get(id=1)
+>>> this_author = Author.objects.get(id=1)
+>>> this_book2 = Book.objects.get(id=2)
+>>> this_author.books.add(this_book)
+>>> this_author.books.add(this_book2)
+>>> Author.objects.get(id=1).__dict__
+{'_state': <django.db.models.base.ModelState object at 0x00000240A95FFDC0>, 'id': 1, 'first_name': 'Jane', 'last_name': 'Austen', 'notes': 'this is an author', 'created_at': datetime.datetime(2020, 4, 14, 8, 16, 49, 210414, tzinfo=<UTC>), 'updated_at': datetime.datetime(2020, 4, 14, 8, 16, 49, 210414, tzinfo=<UTC>)}
+>>> this_author.books.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>]>
+>>> this_author = Author.objects.get(id=2)
+>>> this_book3 = Book.objects.get(id=3)
+>>> this_author.books.add(this_book)
+>>> this_author.books.add(this_book2)
+>>> this_author.books.add(this_book3)
+>>> this_author.books.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>]>
+>>> this_author = Author.objects.get(id=3)
+>>> this_author.books.add(this_book)
+>>> this_author.books.add(this_book2)
+>>> this_author.books.add(this_book3)>>> this_book4 = Book.objects.get(id=4)
+>>> this_author.books.add(this_book4)
+>>> this_book5 = Book.objects.get(id=5)
+>>> this_author = Author.objects.get(id=4)
+>>> this_author.books.add(this_book)
+>>> this_author.books.add(this_book2)
+>>> this_author.books.add(this_book3)
+>>> this_author.books.add(this_book4)
+>>> this_author.books.add(this_book5)
+>>> this_book3.authors.all()
+<QuerySet [<Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>]>
+>>> this_book3.authors.remove(this_author)
+
+>>> this_book4 = Book.objects.get(id=4)
+>>> this_author.books.add(this_book4)
+>>> this_author = Author.objects.get(id=5)
+>>> this_author.books.add(this_book2)
+>>> this_author = Author.objects.get(id=3)
+>>> this_author.books.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>]>
+>>> this_book5.authors.all()
+<QuerySet [<Author: Author object (4)>]>
