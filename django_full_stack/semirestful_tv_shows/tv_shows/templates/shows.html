@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Semi-Restful TV Shows</title>
+        <meta name="description" content="This is a description.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <script src="{% static 'javascript.js' %}" async defer></script>
+    </head>
+    <body>
+        <h1>All Shows</h1>
+        <table> 
+                <tr>
+                <th>ID</th>
+                <th>Title</th> 
+                <th>Network</th>
+                <th>Release Date</th>
+                <th>Actions</th>
+                </tr>
+                {% for show in shows %}
+                <tr>
+                    <td>{{show.id}}</td>
+                    <td>{{show.title}}</td>
+                    <td>{{show.network.name}}</td>
+                    <td>{{show.release_date}}</td>
+                    <td>
+                        <a href="/shows/{{show.id}}">Show</a> | <a href="/shows/{{show.id}}/edit">Edit</a> | <a href="/shows/{{show.id}}/destroy">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                {% endfor %}
+        </table>
+        <a href="/shows/new">Add a New Show</a>
+    </body>
+</html>
