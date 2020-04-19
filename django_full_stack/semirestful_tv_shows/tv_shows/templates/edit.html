@@ -22,6 +22,7 @@
             <p>Description: <input name="description" type="text" value="{{show.desc}}"></p>
             <button type="submit">Update</button>
         </form>
+        <a href="/shows/{{show.id}}">Go to Show</a>
         {% empty %}
             <h1>ERROR: SHOW WITH SPECIFIED ID DOES NOT EXIST.</h1>
         {% endfor %}
