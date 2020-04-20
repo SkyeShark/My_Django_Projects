@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Courses</title>
+        <meta name="description" content="This is a description.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <script src="{% static 'javascript.js' %}" async defer></script>
+    </head>
+    <body>
+        <h3>Are you sure you want to delete the following course?</h3>
+        {% for course in courses %}
+            <p>Name: {{course.name}}</p>
+            <p>Description: {{course.description.text}}</p>
+        <form method="GET" action="/">
+            <button type="submit">No.</button>
+        </form>
+        <form action="confirm/{{course.description_id}}" method="post">
+            {% endfor %}
+            {% csrf_token %}
+            <button type="submit">Yes! I want to delete this.</button>
+        </form>
+    </body>
+</html>

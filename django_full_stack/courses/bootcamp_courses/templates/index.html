@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Courses</title>
+        <meta name="description" content="This is a description.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <script src="{% static 'javascript.js' %}" async defer></script>
+    </head>
+    <body>
+        <h3>Add a new course</h3>
+        <form action="new" method="post">
+            {% csrf_token %}
+            <p>Name:<input name="name" type="text"></p>
+            <p>Description:<input name="description" type="text"></p>
+            <button type="submit">Add</button>
+        </form>
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <h3>Courses</h3>
+        <table> 
+                <tr>
+                <th>Course Name</th>
+                <th>Description</th> 
+                <th>Date Added</th>
+                <th>Actions</th>
+                </tr>
+                {% for course in courses %}
+                <tr>
+                    <td>{{course.name}}</td>
+                    <td>{{course.description.text}}</td>
+                    <td>{{course.date_added}}</td>
+                    <td>
+                        <a href="course/delete/{{course.description.id}}">Remove</a>
+                    </td>
+                </tr>
+                {% empty %}
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                {% endfor %}
+        </table>
+    </body>
+</html>
