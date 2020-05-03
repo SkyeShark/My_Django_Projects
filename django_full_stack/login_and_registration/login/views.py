@@ -7,7 +7,10 @@ def index(request):
     return render(request, 'index.html')
 
 def success(request):
-    return render(request, 'success.html')
+    if request.method == "POST":
+        return render(request, 'success.html')
+    else: 
+        return redirect('/')
 
 def register(request):
     if request.method == "POST":
