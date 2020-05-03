@@ -1,0 +1,11 @@
+div {
+    display: inline-block;
+}
+
+li {
+    color: red;
+}
+
+#success {
+    color: green;
+}
