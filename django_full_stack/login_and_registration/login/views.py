@@ -7,9 +7,10 @@ def index(request):
     return render(request, 'index.html')
 
 def success(request):
-    if request.method == "POST":
+    try:
+        request.session['userid']
         return render(request, 'success.html')
-    else: 
+    except: 
         return redirect('/')
 
 def register(request):
