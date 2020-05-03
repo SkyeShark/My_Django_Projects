@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login/Registration</title>
+        <meta name="description" content="This is a description.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <script src="{% static 'javascript.js' %}" async defer></script>
+    </head>
+    <body>
+        <div>
+            <h3>Success! Welcome {{request.session.username}}'s Wall</h3>
+        </div>
+        <form action="logout" method="post" class="left">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+        <div id='write'>
+            <h2>Make a post:</h2>
+            <form action="/message" method=POST>
+                {% csrf_token %}
+                <input type="text" name='message'>
+                <input type="submit" value="Post">
+            </form>
+        </div>
+        <div id='posts'>
+            {% for post in posts %}
+            <div class='one_post'>
+                <p class='post'>{{post.message}}</p>
+                <p class='poster'>By: {{post.posted_by.first_name}} {{post.posted_by.last_name}}</p>
+                <form action="/comment_new/{{post.id}}" method=POST>
+                    {% csrf_token %}
+                    Comment: <input type="text" name='comment'>
+                    <input type="submit" value='submit'>
+                </form>
+                {% for comment in post.post_comments.all %}
+                    <p>{{comment.comment}}</p>
+                    <p>poster: {{comment.posted_by.first_name}} {{comment.posted_by.last_name}}</p>
+                {% endfor %}
+            </div>
+            {% endfor %}
+    </body>
+</html>
