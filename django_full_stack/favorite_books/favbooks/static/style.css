@@ -1,0 +1,95 @@
+*{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    margin: 0%;
+    padding: 0%;
+    vertical-align:top;
+}
+
+.interior {
+    display: inline-block;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 1%;
+    margin-bottom: 3%;
+    width: 30%;
+}
+
+p{
+    display: inline-block;
+}
+
+.bookbox{
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 2%;
+    margin-top: 1%;
+    border-style: solid;
+    border-width: thick;
+    padding: 2%;
+}
+
+.books{
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+.right{
+    display: inline-block;
+    margin-left:20%;
+    width: fit-content;
+}
+
+.left{
+    display: inline-block;
+    margin-right: 20%;
+    width: fit-content;
+}
+.label {
+    display: inline-block;
+    text-align: left;
+    font-size: medium;
+    width: 20%;
+    margin-right: 5%;
+    margin-top: 2%;
+    margin-left: 4%;
+    white-space:pre;
+}
+
+.head{
+    text-align: center;
+}
+
+input {
+    display: inline-block;
+    margin-left: 4%;
+}
+
+textarea {
+    display: inline-block;
+    margin-left: 4%;
+}
+
+.line{
+    display: block;
+}
+
+button{
+    margin-top: 5%;
+    margin-left: 30%;
+}
+
+#errors{
+    color: red;
+    display: block;
+}
+
+#success{
+    color: green;
+    display: block;
+}
+
+.block{
+    display: block;
+    width: 100%;
+    height: fit-content;
+}

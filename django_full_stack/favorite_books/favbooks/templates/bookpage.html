@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>books</title>
+        <meta name="description" content="A wall to post books!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <script src="{% static 'javascript.js' %}" async defer></script>
+    </head>
+    <body>
+        <div class="block">
+            <p class="interior left">Welcome {{request.session.username}} {{request.session.userlastname}}!</p>
+            <div class="interior">
+                <a href="/books" class="right">Back</a>
+                <form action="logout" method="post" class="left">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+        </div>
+        <div class="block">
+            <div class="interior">
+                <p class="head block">books</p>
+            {% for book in books %}
+                <div class="bookbox">
+                        {% if book.posted_by.id == request.session.userid %}
+                            <form action="update/{{book.id}}" method="post">
+                                {% csrf_token %}
+                                <p class="line">
+                                    <input name="title" type="text" value="{{book.title}}">
+                                </p>
+                                <p class="line">
+                                    <input name="desc" type="text" value="{{book.desc}}">
+                                </p>
+                                <button type="submit">Update</button>
+                            </form>
+                            <form action="/delete/{{book.id}}/{{book.posted_by.id}}" method="post">
+                                {% csrf_token %}
+                                <button type="submit">Delete</button>
+                            </form>
+                        {% else %}
+                            <h3 class="block books">{{book.title}}</h3>
+                            <p class="block books">{{book.desc}}</p>
+                        {% endif %}
+                    <p class="block books">(added by {{book.posted_by.first_name}} {{book.posted_by.last_name}})</p>
+                    <p class="right books">{{book.message_likes.count}} people have favorited this </p>
+                </div>
+            {% empty %}
+            {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

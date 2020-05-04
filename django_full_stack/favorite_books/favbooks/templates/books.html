@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>books</title>
+        <meta name="description" content="A wall to post books!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <script src="{% static 'javascript.js' %}" async defer></script>
+    </head>
+    <body>
+        <div class="block">
+            <p class="interior left">Welcome {{request.session.username}} {{request.session.userlastname}}!</p>
+            <div class="interior">
+                <a href="/myaccount/{{request.session.userid}}" class="right">Edit My Account</a>
+                <form action="logout" method="post" class="left">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+        </div>
+        <div class="block">
+            <div class="interior">
+                <p class="head">Add a Book!</p>
+                <form action="postbook" method="post">
+                    {% csrf_token %}
+                    <p class="line">
+                        <p class="label">Title: </p><input name="title" type="text">
+                    </p>
+                    <p class="line">
+                        <p class="label">description: </p><textarea rows=5 cols=30 name="desc"></textarea>
+                    </p>
+                    <button type="submit">Submit</button>
+                </form>
+            {% if messages %}
+            <div id="errors">
+                <ul class="messages">    
+                    {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            </div>
+            <div class="interior">
+                <p class="head block">Books</p>
+                {% for book in books %}
+                <div class="bookbox">
+                    <h3 class="block books"><a href="book/{{book.id}}">{{book.title}}</a></h3>
+                    <p class="block books">{{book.desc}}</p>
+                    <p class="block books">(added by {{book.posted_by.first_name}} {{book.posted_by.last_name}})</p>
+                    <p class="right books">{{book.message_likes.count}} people have favorited this </p>
+                    <form action="like/{{book.id}}" method="post" class="interior right">
+                        {% csrf_token %}
+                        <button type="submit">Favorite</button>
+                    </form>
+                    {% for like in likes %}
+                        {% if like.liked_by.id == request.session.userid %}
+                            {% if like.book_liked == book %}
+                            <form action="unlike/{{book.id}}" method="post" class="interior right">
+                                {% csrf_token %}
+                                <button type="submit">Unfavorite</button>
+                            </form>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% empty %}
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

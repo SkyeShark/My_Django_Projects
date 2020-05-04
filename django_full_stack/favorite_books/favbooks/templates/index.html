@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login/Registration</title>
+        <meta name="description" content="Login or register for book dashboard here!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <script src="{% static 'javascript.js' %}" async defer></script>
+    </head>
+    <body>
+        <div id="success">
+            {% if request.session.success %}
+            <p>You have successfully registered. Please log in.</p>
+            {% endif %}
+        </div>
+        <div class="interior">
+            <p class="head">Register</p>
+            <form action="register" method="post">
+                {% csrf_token %}
+                <p class="line">
+                    <p class="label">First Name: </p><input name="first_name" type="text">
+                </p>
+                <p class="line">
+                    <p class="label">Last Name: </p><input name="last_name" type="text">
+                </p>
+                <p class="line">
+                    <p class="label">Email: </p><input name="email" type="text">
+                </p>
+                <p class="line">
+                    <p class="label">Password: </p><input name="password" type="password">
+                </p>
+                <p class="line">
+                    <p class="label">Confirm PW: </p><input name="confirmpw" type="password">
+                </p>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+        <div class="interior">
+            <p class="head">Login</p>
+            <form action="login" method="post">
+                {% csrf_token %}
+                <p class="line">
+                    <p class="label">Email: </p><input name="email" type="text">
+                </p>
+                <p class="line">
+                    <p class="label">Password: </p><input name="password" type="password">
+                </p>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        {% if messages %}
+        <div id="errors">
+            <ul class="messages">    
+                {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </body>
+</html>
